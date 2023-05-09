@@ -23,8 +23,25 @@ RSpec.describe PeepRepository do
         expect(peeps.first.id).to eq('1')
         expect(peeps.first.maker_id).to eq('2')
         expect(peeps[1].title).to eq('Post 2')
-        expect(peeps[2].content).to eq('Hello, this is the content of the third.')
+        expect(peeps[2].content).to eq('Hello, this is the third content.')
         expect(peeps[3].time).to eq('2023-04-10 04:05:06')
+      end
+    end
+    
+    describe '#create' do
+      it "creates a new Peep" do 
+        repo = PeepRepository.new
+        
+        repo.create('Post 5', 'Hello, this is the fourth content.', '2023-04-22 18:51:06', '1')
+        
+        all_peeps = repo.all
+        last_peep = all_peeps.last
+        
+        expect(all_peeps.length).to eq(5)
+        expect(last_peep.id).to eq('5')
+        expect(last_peep.maker_id).to eq('1')
+        expect(last_peep.title).to eq('Post 5')
+        expect(last_peep.content).to eq('Hello, this is the fourth content.')
       end
     end
   end
@@ -32,21 +49,6 @@ end
 
 
 
-# # 2
-# # Create a new Peep
-
-# repo = PeepRepository.new
-
-# repo.crete('Post 5', 'Hello, this is the content of the fourth.', '2023-04-22 18:51:06', '1')
-
-# all_peeps = repo.all
-# last_peep = all_peeps.last
-
-# all_peeps.length # =>  5
-# last_peep.id # =>  '5'
-# last_peep.maker_id # =>  '1'
-# last_peep.title # =>  'Post 5'
-# last_peep.content # => 'Hello, this is the content of the fourth.'
 
 
 # # 3

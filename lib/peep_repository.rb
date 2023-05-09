@@ -23,12 +23,11 @@ class PeepRepository
     return @peeps
   end
   
-  # def create
-  #   # Executes the SQL query:
-  #   # INSERT INTO peeps (title, content, time, maker_id) VALUES ($1, $2, $3, $4);
-
-  #   # Inserts a new Peep in the table peeps
-  # end
+  def create(title, content, time, maker_id) # creates a new Peep object, returns nothing
+    sql = 'INSERT INTO peeps (title, content, time, maker_id) VALUES ($1, $2, $3, $4);'
+    params = [title, content, time, maker_id]
+    result_set = DatabaseConnection.exec_params(sql, params)
+  end
 
   # # Gets a single record by its ID
   # # One argument: the id (number)

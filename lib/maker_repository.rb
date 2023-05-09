@@ -31,12 +31,18 @@ class MakerRepository
     result_set = DatabaseConnection.exec_params(sql, sql_params)
   end
 
-  # # Gets a single record by its ID
-  # # One argument: the id (number)
-  # def find(id)
-  #   # Executes the SQL query:
-  #   # SELECT id, name, email, username, password FROM makers WHERE id = $1;
+  def find(id) # finds a Maker by id
+    sql = 'SELECT id, name, email, username, password FROM makers WHERE id = $1;'
+    sql_params = [id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
 
-  #   # Returns a single Maker object.
-  # end
+    record = result_set[0]
+    maker = Maker.new
+    maker.id = record['id']
+    maker.name = record['name']
+    maker.email = record['email']
+    maker.username = record['username']
+    maker.password = record['password']
+    return maker
+  end
 end

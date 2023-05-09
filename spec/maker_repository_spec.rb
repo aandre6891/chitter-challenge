@@ -30,13 +30,13 @@ RSpec.describe MakerRepository do
     end
     
     describe '#create' do
-      xit 'creates a new maker' do
+      it 'creates a new maker' do
             
         repo = MakerRepository.new
         new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
         
-        last_maker = repo.all.last
         makers = repo.all
+        last_maker = makers.last
         
         expect(makers.length).to eq(5)
         expect(last_maker.id).to eq('5')
@@ -45,20 +45,23 @@ RSpec.describe MakerRepository do
         expect(last_maker.username).to eq('daniele678')
       end
     end    
+
+    describe '#find' do
+      it 'finds a maker by id' do
+    
+        repo = MakerRepository.new
+        
+        selected_maker = repo.find(3)
+        
+        expect(selected_maker.id).to eq('3')
+        expect(selected_maker.name).to eq('Chiara')
+        expect(selected_maker.email).to eq('chiara@fakemail.com')
+        expect(selected_maker.username).to eq('chiara6647')
+      end
+    end
   end    
 end
 
 
 
 
-# # 3
-# # Get a single maker
-
-# repo = MakerRepository.new
-
-# maker = repo.find(3)
-
-# maker.id # =>  3
-# maker.name # =>  'Chiara'
-# maker.email # =>  'chiara@fakemail.com'
-# maker.username # =>  'chiara6647'

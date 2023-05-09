@@ -130,7 +130,7 @@ Replace the relevant bits in this example with your own:
 -- Create the table without the foreign key first.
 CREATE TABLE makers (
   id SERIAL PRIMARY KEY,
-  title text,
+  name text,
   email text,
   username text,
   password text
@@ -149,10 +149,7 @@ CREATE TABLE posts (
     on delete cascade
 );
 
-title: text
-content: text
-time: timestamp
-maker_id: int
+
 
 ```
 

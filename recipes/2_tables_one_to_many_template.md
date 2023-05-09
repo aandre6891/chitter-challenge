@@ -33,11 +33,6 @@ As a Maker
 So that I can avoid others posting messages on Chitter as me
 I want to log out of Chitter
 
-ADVANCED
-
-As a Maker
-So that I can stay constantly tapped in to the shouty box of Chitter
-I want to receive an email if I am tagged in a Peep
 ```
 
 ```
@@ -50,14 +45,14 @@ Put the different nouns in this table. Replace the example with your own nouns.
 
 | Record                | Properties                     |
 | --------------------- | -------------------------------|
-| posts                 | title, content, time, maker_id
+| peeps                 | title, content, time, maker_id
 | makers                | name, email, username, password
 
 1. Name of the first table (always plural): `makers` 
 
     Column names: `name`, `email`, `username`, `password`
 
-2. Name of the second table (always plural): `posts` 
+2. Name of the second table (always plural): `peeps` 
 
     Column names: `title`, `content`, `time`, `maker_id`
 
@@ -79,7 +74,7 @@ email: text
 username: text
 password: text
 
-Table: posts
+Table: peeps
 id: SERIAL
 title: text
 content: text
@@ -107,14 +102,14 @@ Replace the relevant bits in this example with your own:
 ```
 # EXAMPLE
 
-1. Can one maker have many posts? YES
-2. Can one post have many makers? NO
+1. Can one maker have many peeps? YES
+2. Can one peep have many makers? NO
 
 -> Therefore,
--> A maker HAS MANY posts
--> A post BELONGS TO a maker
+-> A maker HAS MANY peeps
+-> A peep BELONGS TO a maker
 
--> Therefore, the foreign key is on the posts table.
+-> Therefore, the foreign key is on the peeps table.
 ```
 
 *If you can answer YES to the two questions, you'll probably have to implement a Many-to-Many relationship, which is more complex and needs a third table (called a join table).*
@@ -137,7 +132,7 @@ CREATE TABLE makers (
 );
 
 -- Then the table with the foreign key first.
-CREATE TABLE posts (
+CREATE TABLE peeps (
   id SERIAL PRIMARY KEY,
   title text,
   content text,
@@ -156,7 +151,7 @@ CREATE TABLE posts (
 ## 5. Create the tables.
 
 ```bash
-psql -h 127.0.0.1 database_name < albums_table.sql
+# psql -h 127.0.0.1 database_name < albums_table.sql
 ```
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->

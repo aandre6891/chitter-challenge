@@ -11,13 +11,23 @@ describe Application do
   let(:app) { Application.new }
 
   def reset_tables
-  seed_sql = File.read('spec/seeds/music_library.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
+  seed_sql = File.read('spec/seeds/chitter_seeds.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
   connection.exec(seed_sql)
   end
 
   before(:each) do 
     reset_tables
+  end
+
+  context "GET /" do
+    it 'should return the homepage' do
+
+      response = get("/") 
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('Welcome to Chitter!')
+    end
   end
 
   # context "GET /albums" do # example

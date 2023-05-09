@@ -24,12 +24,12 @@ class MakerRepository
     return @makers
   end
 
-  # def create
-  #   # Executes the SQL query:
-  #   # INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);
+  def create(name, email, username, password) # Inserts a new Maker in the table makers, returns nothing
 
-  #   # Inserts a new Maker in the table makers
-  # end
+    sql = 'INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);'
+    sql_params = [name, email, username, password]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+  end
 
   # # Gets a single record by its ID
   # # One argument: the id (number)

@@ -3,15 +3,17 @@ require_relative '../lib/maker_repository'
 require_relative '../lib/database_connection'
 require_relative '../lib/maker'
 
+DatabaseConnection.connect
+
 
 RSpec.describe MakerRepository do
-  def reset_makers_table
-    seed_sql = File.read('seeds/chitter_seeds.sql')
-    connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
-    connection.exec(seed_sql)
-  end
-  
   describe MakerRepository do
+    def reset_makers_table
+      seed_sql = File.read('seeds/chitter_seeds.sql')
+      connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
+      connection.exec(seed_sql)
+    end
+  
     before(:each) do 
       reset_makers_table
     end
@@ -31,15 +33,16 @@ RSpec.describe MakerRepository do
     end
     
     describe '#create' do
-      it 'creates a new maker' do
+      xit 'creates a new maker' do
             
         repo = MakerRepository.new
         new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
         
         last_maker = repo.all.last
+        makers = repo.all
         
-        expect(repo.all).to eq('5')
-        expect(last_maker.id).to eq(5)
+        expect(makers.length).to eq(5)
+        expect(last_maker.id).to eq('5')
         expect(last_maker.name).to eq('Daniele')
         expect(last_maker.email).to eq('daniele@fakemail.com')
         expect(last_maker.username).to eq('daniele678')

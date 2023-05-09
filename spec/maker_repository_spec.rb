@@ -1,5 +1,7 @@
 # file: spec/maker_repository_spec.rb
 require_relative '../lib/maker_repository'
+require_relative '../lib/database_connection'
+require_relative '../lib/maker'
 
 
 RSpec.describe MakerRepository do
@@ -8,7 +10,7 @@ RSpec.describe MakerRepository do
     connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
     connection.exec(seed_sql)
   end
-
+  
   describe MakerRepository do
     before(:each) do 
       reset_makers_table

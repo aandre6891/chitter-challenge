@@ -1,22 +1,49 @@
 # Chitter Challenge Model and Repository Classes Design Recipe
 
-_Copy this recipe template to design and implement Model and Repository classes for a database table._
+STRAIGHT UP
+
+As a Maker
+So that I can let people know what I am doing  
+I want to post a message (peep) to chitter
+
+As a maker
+So that I can see what others are saying  
+I want to see all peeps in reverse chronological order
+
+As a Maker
+So that I can better appreciate the context of a peep
+I want to see the time at which it was made
+
+As a Maker
+So that I can post messages on Chitter as me
+I want to sign up for Chitter
+
+HARDER
+
+As a Maker
+So that only I can post messages on Chitter as me
+I want to log in to Chitter
+
+As a Maker
+So that I can avoid others posting messages on Chitter as me
+I want to log out of Chitter
+
+ADVANCED
+
+As a Maker
+So that I can stay constantly tapped in to the shouty box of Chitter
+I want to receive an email if I am tagged in a Peep
 
 ## 1. Design and create the Table
 
-<!-- If the table is already created in the database, you can skip this step.
+(<!-- If the table is already created in the database, you can skip this step.
 
 Otherwise, [follow this recipe to design and create the SQL schema for your table](./single_table_design_recipe_template.md).
 
 *In this template, we'll use an example table `students`*
 
 ```
-# EXAMPLE
-
-Table: students
-
-Columns:
-id | name | cohort_name -->
+(done)
 ```
 
 ## 2. Create Test SQL seeds (done)
@@ -51,16 +78,16 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: makers
 
 # Model class
-# (in lib/student.rb)
-class Student
+# (in lib/maker.rb)
+class Maker
 end
 
 # Repository class
-# (in lib/student_repository.rb)
-class StudentRepository
+# (in lib/maker_repository.rb)
+class MakerRepository
 end
 ```
 
@@ -70,15 +97,15 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: makers
 
 # Model class
-# (in lib/student.rb)
+# (in lib/maker.rb)
 
-class Student
+class Maker
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :cohort_name
+  attr_accessor :id, :name, :email, :username, :password
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -100,41 +127,27 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: makers
 
 # Repository class
-# (in lib/student_repository.rb)
+# (in lib/maker_repository.rb)
 
-class StudentRepository
-
-  # Selecting all records
-  # No arguments
-  def all
+class MakerRepository
+  def create
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students;
+    # INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);
 
-    # Returns an array of Student objects.
+    # Inserts a new Maker in the table makers
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT id, name, email, username, password FROM makers WHERE id = $1;
 
-    # Returns a single Student object.
+    # Returns a single Maker object.
   end
-
-  # Add more methods below for each operation you'd like to implement.
-
-  # def create(student)
-  # end
-
-  # def update(student)
-  # end
-
-  # def delete(student)
-  # end
 end
 ```
 

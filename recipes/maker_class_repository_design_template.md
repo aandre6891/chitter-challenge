@@ -133,6 +133,13 @@ Using comments, define the method signatures (arguments and return value) and wh
 # (in lib/maker_repository.rb)
 
 class MakerRepository
+  def all
+    # Executes the SQL query:
+    # SELECT id, name, email, username, password FROM makers;
+
+    # Returns an array of Maker objects.
+  end
+
   def create
     # Executes the SQL query:
     # INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);
@@ -161,32 +168,46 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all makers
 
-repo = StudentRepository.new
+repo = MakerRepository.new
 
-students = repo.all
+makers = repo.all
 
-students.length # =>  2
+makers.length # =>  '4'
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
-
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+makers[0].id # =>  1
+makers[1].name # =>  'Ilaria'
+makers[2].email # =>  'chiara@fakemail.com'
+makers[3].username # =>  'barbara668'
 
 # 2
-# Get a single student
+# Create a new maker
 
-repo = StudentRepository.new
+repo = MakerRepository.new
 
-student = repo.find(1)
+new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+repo.all # => '5'
+
+last_maker = repo.all.last
+
+last_maker.id # =>  5
+last_maker.name # =>  'Daniele'
+last_maker.email # =>  'daniele@fakemail.com'
+last_maker.username # => 'daniele678'
+
+# 3
+# Get a single maker
+
+repo = MakerRepository.new
+
+maker = repo.find(3)
+
+maker.id # =>  3
+maker.name # =>  'Chiara'
+maker.email # =>  'chiara@fakemail.com'
+maker.username # =>  'chiara6647'
 
 # Add more examples for each method
 ```

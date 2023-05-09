@@ -19,35 +19,30 @@ Columns:
 id | name | cohort_name -->
 ```
 
-## 2. Create Test SQL seeds
+## 2. Create Test SQL seeds (done)
 
 Your tests will depend on data stored in PostgreSQL to run.
 
 If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
--- EXAMPLE
--- (file: spec/seeds_{table_name}.sql)
+TRUNCATE TABLE posts RESTART IDENTITY;
+TRUNCATE TABLE makers RESTART IDENTITY;
 
--- Write your SQL seed here. 
+INSERT INTO makers (name, email, username, password) VALUES 
+('Andrea', 'ruggieri6891@gmail.com', 'andre6891', 'graves86'),
+('Ilaria', 'ilaria@fakemail.com', 'ilaria678', 'as89v89sdg98'),
+('Chiara', 'chiara@fakemail.com', 'chiara6647', '778asd9svh'),
+('Barbara', 'barbara@fakemail.com', 'barbara668', 'asd789sdf');
 
--- First, you'd need to truncate the table - this is so our table is emptied between each test run,
--- so we can start with a fresh state.
--- (RESTART IDENTITY resets the primary key)
-
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
-
--- Below this line there should only be `INSERT` statements.
--- Replace these statements with your own seed data.
-
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
-```
-
-Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
+INSERT INTO peeps (title, content, time, maker_id) VALUES 
+('Post 1', 'Hello, this is the first content.', '2023-01-08 04:05:06', '2'),
+('Post 2', 'Hello, this is the content of the second post.', '2023-02-24 04:05:06', '1'),
+('Post 3', 'Hello, this is the content of the third.', '2023-03-30 04:05:06', '3'),
+('Post 4', 'Hello, this is the content of the fourth.', '2023-04-10 04:05:06', '4');
 
 ```bash
-psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
+
 ```
 
 ## 3. Define the class names

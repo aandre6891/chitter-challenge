@@ -140,7 +140,7 @@ class MakerRepository
     # Returns an array of Maker objects.
   end
 
-  def create
+  def create(name, email, username, password)
     # Executes the SQL query:
     # INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);
 

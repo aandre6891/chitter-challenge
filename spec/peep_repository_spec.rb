@@ -44,22 +44,24 @@ RSpec.describe PeepRepository do
         expect(last_peep.content).to eq('Hello, this is the fourth content.')
       end
     end
+
+    describe '#find' do
+      it "returns a single Peep" do
+      
+        repo = PeepRepository.new
+        
+        selected_peep = repo.find(2)
+        
+        expect(selected_peep.id).to eq('2')
+        expect(selected_peep.title).to eq('Post 2')
+        expect(selected_peep.content).to eq('Hello, this is the content of the second post.')
+        expect(selected_peep.time).to eq('2023-02-24 04:05:06')
+        expect(selected_peep.maker_id).to eq('1')
+      end
+    end
   end
 end
 
 
 
 
-
-# # 3
-# # Get a single Peep
-
-# repo = PeepRepository.new
-
-# selected_peep = repo.find(2)
-
-# selected_peep.id # =>  '2'
-# selected_peep.title # =>  'Post 2'
-# selected_peep.content # =>  'Hello, this is the content of the second post.'
-# selected_peep.time # =>  '2023-02-24 04:05:06'
-# selected_peep.maker_id # =>  '1'

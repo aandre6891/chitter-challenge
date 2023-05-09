@@ -53,8 +53,7 @@ Your tests will depend on data stored in PostgreSQL to run.
 If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
-TRUNCATE TABLE posts RESTART IDENTITY;
-TRUNCATE TABLE makers RESTART IDENTITY;
+TRUNCATE TABLE makers, peeps RESTART IDENTITY;
 
 INSERT INTO makers (name, email, username, password) VALUES 
 ('Andrea', 'ruggieri6891@gmail.com', 'andre6891', 'graves86'),
@@ -78,16 +77,16 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: makers
+# Table name: peeps
 
 # Model class
-# (in lib/maker.rb)
-class Maker
+# (in lib/peep.rb)
+class Peep
 end
 
 # Repository class
-# (in lib/maker_repository.rb)
-class MakerRepository
+# (in lib/peep_repository.rb)
+class PeepRepository
 end
 ```
 
@@ -97,15 +96,15 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: makers
+# Table name: peeps
 
 # Model class
-# (in lib/maker.rb)
+# (in lib/peep.rb)
 
-class Maker
+class Peep
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :email, :username, :password
+  attr_accessor :id, :title, :content, :time, :maker_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -127,26 +126,33 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: makers
+# Table name: peeps
 
 # Repository class
-# (in lib/maker_repository.rb)
+# (in lib/peep_repository.rb)
 
-class MakerRepository
+class PeepRepository
+  def all
+    # Executes the SQL query:
+    # SELECT id, title, content, time, maker_id FROM peeps;
+
+    # returns an array of Peep objects
+  end
+  
   def create
     # Executes the SQL query:
-    # INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);
+    # INSERT INTO peeps (title, content, time, maker_id) VALUES ($1, $2, $3, $4);
 
-    # Inserts a new Maker in the table makers
+    # Inserts a new Peep in the table peeps
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
-  def find(id)
+  def find(id) # can be useful?
     # Executes the SQL query:
-    # SELECT id, name, email, username, password FROM makers WHERE id = $1;
+    # SELECT id, title, content, time, maker_id FROM peeps WHERE id = $1;
 
-    # Returns a single Maker object.
+    # Returns a single Peep object.
   end
 end
 ```
@@ -161,32 +167,50 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all Peeps
 
-repo = StudentRepository.new
+repo = PeepRepository.new
 
-students = repo.all
+peeps = repo.all
 
-students.length # =>  2
+peeps.length # =>  4
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+peeps.first.id # =>  '1'
+peeps.first.maker_id # =>  '2'
+peeps[1].title # =>  'Post 2'
+peeps[2].content # =>  'Hello, this is the content of the third.'
+peeps[3].time # =>  '2023-04-10 04:05:06'
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
 
 # 2
-# Get a single student
+# Create a new Peep
 
-repo = StudentRepository.new
+repo = PeepRepository.new
 
-student = repo.find(1)
+repo.crete('Post 5', 'Hello, this is the content of the fourth.', '2023-04-22 18:51:06', '1')
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+all_peeps = repo.all
+last_peep = all_peeps.last
+
+all_peeps.length # =>  5
+last_peep.id # =>  '5'
+last_peep.maker_id # =>  '1'
+last_peep.title # =>  'Post 5'
+last_peep.content # => 'Hello, this is the content of the fourth.'
+
+
+# 3
+# Get a single Peep
+
+repo = PeepRepository.new
+
+selected_peep = repo.find(2)
+
+selected_peep.id # =>  '2'
+selected_peep.title # =>  'Post 2'
+selected_peep.content # =>  'Hello, this is the content of the second post.'
+selected_peep.time # =>  '2023-02-24 04:05:06'
+selected_peep.maker_id # =>  '1'
 
 # Add more examples for each method
 ```

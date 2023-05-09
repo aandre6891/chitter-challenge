@@ -53,8 +53,7 @@ Your tests will depend on data stored in PostgreSQL to run.
 If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
-TRUNCATE TABLE posts RESTART IDENTITY;
-TRUNCATE TABLE makers RESTART IDENTITY;
+TRUNCATE TABLE makers, peeps RESTART IDENTITY;
 
 INSERT INTO makers (name, email, username, password) VALUES 
 ('Andrea', 'ruggieri6891@gmail.com', 'andre6891', 'graves86'),

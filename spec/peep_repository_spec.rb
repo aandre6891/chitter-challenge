@@ -61,7 +61,3 @@ RSpec.describe PeepRepository do
     end
   end
 end
-
-
-
-

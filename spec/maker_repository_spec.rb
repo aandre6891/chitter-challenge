@@ -3,17 +3,14 @@ require_relative '../lib/maker_repository'
 require_relative '../lib/database_connection'
 require_relative '../lib/maker'
 
-DatabaseConnection.connect
-
-
 RSpec.describe MakerRepository do
-  describe MakerRepository do
-    def reset_makers_table
-      seed_sql = File.read('seeds/chitter_seeds.sql')
-      connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
-      connection.exec(seed_sql)
-    end
+  def reset_makers_table
+    seed_sql = File.read('spec/seeds/chitter_seeds.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_db_test' })
+    connection.exec(seed_sql)
+  end
   
+  describe MakerRepository do
     before(:each) do 
       reset_makers_table
     end

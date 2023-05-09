@@ -1,7 +1,4 @@
--- (file: spec/seeds_{table_name}.sql)
-
-TRUNCATE TABLE makers RESTART IDENTITY CASCADE;
-TRUNCATE TABLE peeps RESTART IDENTITY CASCADE;
+TRUNCATE TABLE makers, peeps RESTART IDENTITY;
 
 INSERT INTO makers (name, email, username, password) VALUES 
 ('Andrea', 'ruggieri6891@gmail.com', 'andre6891', 'graves86'),

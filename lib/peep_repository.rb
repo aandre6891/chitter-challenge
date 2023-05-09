@@ -29,12 +29,20 @@ class PeepRepository
     result_set = DatabaseConnection.exec_params(sql, params)
   end
 
-  # # Gets a single record by its ID
-  # # One argument: the id (number)
-  # def find(id) # can be useful?
-  #   # Executes the SQL query:
-  #   # SELECT id, title, content, time, maker_id FROM peeps WHERE id = $1;
+  def find(id) # returns a single Peep object
+    sql = 'SELECT id, title, content, time, maker_id FROM peeps WHERE id = $1;'
+    params = [id]
+    result_set = DatabaseConnection.exec_params(sql, params)
 
-  #   # Returns a single Peep object.
-  # end
+    record = result_set.first
+    selected_peep = Peep.new
+    
+    selected_peep.id = result_set.first['id']
+    selected_peep.title = result_set.first['title']
+    selected_peep.content = result_set.first['content']
+    selected_peep.time = result_set.first['time']
+    selected_peep.maker_id = result_set.first['maker_id']
+
+    return selected_peep
+  end
 end

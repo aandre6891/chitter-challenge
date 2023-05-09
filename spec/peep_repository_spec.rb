@@ -54,7 +54,7 @@ RSpec.describe PeepRepository do
         
         expect(selected_peep.id).to eq('2')
         expect(selected_peep.title).to eq('Post 2')
-        expect(selected_peep.content).to eq('Hello, this is the content of the second post.')
+        expect(selected_peep.content).to eq('Hello, this is the second content.')
         expect(selected_peep.time).to eq('2023-02-24 04:05:06')
         expect(selected_peep.maker_id).to eq('1')
       end

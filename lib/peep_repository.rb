@@ -1,3 +1,5 @@
+require_relative 'peep'
+
 class PeepRepository
   def initialize # initialize an empty array
     @peeps = []
@@ -14,7 +16,9 @@ class PeepRepository
       peep.title = record['title']
       peep.content = record['content']
       peep.time = record['time']
-      peep.maker_id = record['maker']
+      peep.maker_id = record['maker_id']
+
+      @peeps << peep
     end
     return @peeps
   end

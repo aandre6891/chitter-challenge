@@ -29,40 +29,27 @@ RSpec.describe MakerRepository do
         expect(makers[3].username).to eq('barbara668')
       end
     end
-  end
     
+    describe '#create' do
+      it 'creates a new maker' do
+            
+        repo = MakerRepository.new
+        new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
+        
+        last_maker = repo.all.last
+        
+        expect(repo.all).to eq('5')
+        expect(last_maker.id).to eq(5)
+        expect(last_maker.name).to eq('Daniele')
+        expect(last_maker.email).to eq('daniele@fakemail.com')
+        expect(last_maker.username).to eq('daniele678')
+      end
+    end    
+  end    
 end
 
 
-# # 1
-# # Get all makers
 
-# repo = MakerRepository.new
-
-# makers = repo.all
-
-# makers.length # =>  '4'
-
-# makers[0].id # =>  1
-# makers[1].name # =>  'Ilaria'
-# makers[2].email # =>  'chiara@fakemail.com'
-# makers[3].username # =>  'barbara668'
-
-# # 2
-# # Create a new maker
-
-# repo = MakerRepository.new
-
-# new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
-
-# repo.all # => '5'
-
-# last_maker = repo.all.last
-
-# last_maker.id # =>  5
-# last_maker.name # =>  'Daniele'
-# last_maker.email # =>  'daniele@fakemail.com'
-# last_maker.username # => 'daniele678'
 
 # # 3
 # # Get a single maker

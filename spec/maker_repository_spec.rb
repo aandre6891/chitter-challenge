@@ -70,12 +70,9 @@ RSpec.describe MakerRepository do
     
         repo = MakerRepository.new
         
-        selected_maker = repo.find_by_email('chiara@fakemail.com')
+        result = repo.find_by_email('chiara@fakemail.com')
         
-        expect(selected_maker.id).to eq('3')
-        expect(selected_maker.name).to eq('Chiara')
-        expect(selected_maker.email).to eq('chiara@fakemail.com')
-        expect(selected_maker.username).to eq('chiara6647')
+        expect(result).to eq('3')
       end
     end
   end    

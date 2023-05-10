@@ -47,7 +47,7 @@ describe Application do
       response = get("/login") 
 
       expect(response.status).to eq 200
-      expect(response.body).to include('Log In to post a peep!')
+      expect(response.body).to include('Log In to see all the peeps')
     end
   end
  
@@ -84,6 +84,18 @@ describe Application do
       
       expect(response.status).to eq 200
       expect(response.body).to include('Welcome Jordan!')
+    end
+  end
+  
+  context "POST /login" do
+    it 'should show the user page' do
+      response = post(
+        "/login", 
+        username: "ilaria678",
+        password: "as89v89sdg98"
+      )
+      
+      response.should redirect_to("/user/2")
     end
   end
 end

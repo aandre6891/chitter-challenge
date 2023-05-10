@@ -29,26 +29,14 @@ describe Application do
       expect(response.body).to include('<h3>Welcome to Chitter!</h3>')
     end
   end
+  
+  context "GET /signup" do
+    it 'should return the signup page' do
 
-  # context "GET /albums" do # example
-  #   it "should return the links to the albums" do
-  #     response = get("/albums")
-      
-  #     expect(response.status).to eq 200
-  #     expect(response.body).to include('<a href="/albums/1">Doolittle</a><br/>')
-  #     expect(response.body).to include('<a href="/albums/2">Surfer Rosa</a><br/>')
-  #     expect(response.body).to include('<a href="/albums/3">Waterloo</a><br/>')
-  #     expect(response.body).to include('<a href="/albums/12">Ring Ring</a><br/>')
-  #   end
-  # end
+      response = get("/signup") 
 
-  # context "POST /albums" do # example
-  #   it "should validate album parameters" do
-  #     response = post("/albums", 
-  #       invalid_artist_title: 'OK Computer', 
-  #       another_invalid_parameter: 'invalid parameter'
-  #     )  
-
-  #     expect(response.status).to eq(400) 
-  #   end
+      expect(response.status).to eq 200
+      expect(response.body).to include('Sign up for Chitter!')
+    end
+  end
 end

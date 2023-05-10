@@ -57,4 +57,16 @@ class Application < Sinatra::Base
     maker_id = repo.find_by_email(new_maker.email)
     redirect '/user/' + maker_id
   end
+  
+  post '/login' do
+    repo = MakerRepository.new
+    correct_email = repo.all.any? { |maker| maker.email == params[:email] }
+    correct_password = repo.all.any? { |maker| maker.password == params[:password] }
+    if correct_email && correct_password
+      maker_id = repo.find_by_email(params[:email])
+      redirect '/user/' + maker_id
+    else
+      return 'Invalid Email or Password <a href="/login">Try again</a>'
+    end
+  end
 end

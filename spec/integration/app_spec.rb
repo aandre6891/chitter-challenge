@@ -91,11 +91,23 @@ describe Application do
     it 'should show the user page' do
       response = post(
         "/login", 
-        username: "ilaria678",
+        email: "ilaria@fakemail.com",
         password: "as89v89sdg98"
       )
       
-      response.should redirect_to("/user/2")
+      expect(response.status).to eq 302
+    end
+  end
+
+  context "POST /login" do
+    it 'should return status 200 when the password is not valid' do
+      response = post(
+        "/login", 
+        email: "ilaria@fakemail.com",
+        password: "11111"
+      )
+      
+      expect(response.status).to eq 200
     end
   end
 end

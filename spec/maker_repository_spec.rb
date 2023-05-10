@@ -33,7 +33,12 @@ RSpec.describe MakerRepository do
       it 'creates a new maker' do
             
         repo = MakerRepository.new
-        new_maker = repo.create('Daniele', 'daniele@fakemail.com', 'daniele678', 'asdlkasd9787')
+        new_maker = Maker.new
+        new_maker.name = 'Daniele'
+        new_maker.email = 'daniele@fakemail.com'
+        new_maker.username = 'daniele678'
+        new_maker.password = 'asdlkasd9787'
+        repo.create(new_maker)
         
         makers = repo.all
         last_maker = makers.last

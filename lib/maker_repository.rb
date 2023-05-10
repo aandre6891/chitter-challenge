@@ -1,5 +1,5 @@
 # (in lib/maker_repository.rb)
-
+require_relative 'maker'
 require_relative 'database_connection'
 
 class MakerRepository
@@ -24,11 +24,9 @@ class MakerRepository
     return @makers
   end
 
-  def create(name, email, username, password) # Inserts a new Maker in the table makers, returns nothing
-
+  def create(new_maker) # Inserts a new Maker in the table makers, returns nothing
     sql = 'INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);'
-    sql_params = [name, email, username, password]
-    result_set = DatabaseConnection.exec_params(sql, sql_params)
+    result_set = DatabaseConnection.exec_params(sql, [new_maker.name, new_maker.email, new_maker.username, new_maker.password])
   end
 
   def find(id) # finds a Maker by id

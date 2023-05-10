@@ -1,9 +1,39 @@
-.title {
-  text-align: center;
-  color: cornflowerblue;
-}
+<style>
 
 .subtitle {
   text-align: center;
   color: rgb(32, 78, 165);
 }
+
+.chitter_logo {
+  width: 250px;
+}
+
+.topnav {
+  background-color: #00eaff;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: rgb(0, 29, 63);
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #fcfcff;
+  color: rgb(0, 0, 0);
+}
+
+</style>

@@ -27,6 +27,7 @@ describe Application do
 
       expect(response.status).to eq 200
       expect(response.body).to include('<h3>Welcome to Chitter!</h3>')
+      expect(response.body).to include('Hello, this is the fourth content.')
     end
   end
   
@@ -37,6 +38,16 @@ describe Application do
 
       expect(response.status).to eq 200
       expect(response.body).to include('Sign up for Chitter!')
+    end
+  end
+
+  context "GET /login" do
+    it 'should return the login page' do
+
+      response = get("/login") 
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('Log In to post a peep!')
     end
   end
 end

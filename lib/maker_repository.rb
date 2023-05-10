@@ -43,4 +43,19 @@ class MakerRepository
     maker.password = record['password']
     return maker
   end
+  
+  def find_by_email(email) # finds a Maker by id
+    sql = 'SELECT id, name, email, username, password FROM makers WHERE email = $1;'
+    sql_params = [email]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+
+    record = result_set[0]
+    maker = Maker.new
+    maker.id = record['id']
+    maker.name = record['name']
+    maker.email = record['email']
+    maker.username = record['username']
+    maker.password = record['password']
+    return maker
+  end
 end

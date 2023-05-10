@@ -50,4 +50,40 @@ describe Application do
       expect(response.body).to include('Log In to post a peep!')
     end
   end
+ 
+  context "GET /post" do
+    it 'should return the post page' do
+
+      response = get("/post") 
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('Post a new peep')
+    end
+  end
+
+  context "GET /user/:id" do
+    it 'should return the user page' do
+      response = get("/user/1")
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('Welcome Andrea!')
+    end
+  end
+
+  context "POST /signup" do
+    it 'should create a new user' do
+      response = post(
+        "/signup", 
+        name: "Jordan", 
+        email: "jordan@chitter.com",
+        username: "jordan555",
+        password: "123456"
+      )
+
+      response = get('/user/5')
+      
+      expect(response.status).to eq 200
+      expect(response.body).to include('Welcome Jordan!')
+    end
+  end
 end

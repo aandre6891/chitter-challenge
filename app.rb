@@ -19,7 +19,7 @@ class Application < Sinatra::Base
     @peeps = repo.all
     return erb(:index)
   end
-
+  
   get '/signup' do
     return erb(:signup)
   end
@@ -41,7 +41,7 @@ class Application < Sinatra::Base
   post '/signup' do
     repo = MakerRepository.new 
     if repo.all.any? { |maker| maker.email == params[:email] }
-      redirect '/signup'
+      return 'A user with this email address already exists <a href="/signup">Try with another email</a>'      
     else
       new_maker = Maker.new
       new_maker.name = params[:name]

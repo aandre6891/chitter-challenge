@@ -39,15 +39,18 @@ class Application < Sinatra::Base
   end
 
   post '/signup' do
-    repo = MakerRepository.new
-    new_maker = Maker.new
-    new_maker.name = params[:name]
-    new_maker.email = params[:email]
-    new_maker.username = params[:username]
-    new_maker.password = params[:password]
-    repo.create(new_maker)
-
-    maker_id = repo.find_by_email(params[:email])
-    redirect '/user/' + maker_id
+    repo = MakerRepository.new 
+    if repo.all.any? { |maker| maker.email == params[:email] }
+      redirect '/signup'
+    else
+      new_maker = Maker.new
+      new_maker.name = params[:name]
+      new_maker.email = params[:email]
+      new_maker.username = params[:username]
+      new_maker.password = params[:password]
+      repo.create(new_maker)
+      maker_id = repo.find_by_email(new_maker.email)
+      redirect '/user/' + maker_id
+    end
   end
 end

@@ -15,14 +15,24 @@
     <div class="">
       <a href='/signup'>Sign Up</a>
       <a href='/login'>Log In</a>
+      <a href='/post'>Post a peep</a>
     </div>
 
     <div>
-      <p>These are the last peeps:</p>
+      <p>These are the last 3 peeps:</p>
     </div>
 
     <div>
-      <%= @peeps%>
+      <% @peeps.last(3).each do |peep| %>
+        <div class="w3-container">
+          <div class="last_peeps">
+            <%= peep.title %>
+            <%= peep.time %>
+            <%= peep.maker_id %>
+            <%= peep.content %>
+          </div>
+        </div>
+      <% end %>
     </div>
     
   </body>

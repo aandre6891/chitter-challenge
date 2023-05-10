@@ -33,8 +33,11 @@ class Application < Sinatra::Base
   end
   
   get '/user/:id' do
-    repo = MakerRepository.new
-    @maker = repo.find(params[:id])
+    repo_makers = MakerRepository.new
+    repo_peeps = PeepRepository.new
+    
+    @maker = repo_makers.find(params[:id])
+    @peeps = repo_peeps.all
     return erb(:user)
   end
 

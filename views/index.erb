@@ -14,8 +14,8 @@
 
     <div class="">
       <a href='/signup'>Sign Up</a>
-      <a href='/login'>Log In</a>
-      <a href='/post'>Post a peep</a>
+      <%# <a href='/login'>Log In</a> %>
+      <%# <a href='/post'>Post a peep</a> %>
     </div>
 
     <div>
@@ -23,7 +23,7 @@
     </div>
 
     <div>
-      <% @peeps.last(3).each do |peep| %>
+      <% @peeps.last(3).reverse_each do |peep| %>
         <div class="w3-container">
           <div class="last_peeps">
             <%= peep.title %>

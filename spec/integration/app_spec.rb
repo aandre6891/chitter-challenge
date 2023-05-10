@@ -86,5 +86,4 @@ describe Application do
       expect(response.body).to include('Welcome Jordan!')
     end
   end
-  
 end

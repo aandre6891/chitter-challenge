@@ -26,7 +26,7 @@ describe Application do
       response = get("/") 
 
       expect(response.status).to eq 200
-      expect(response.body).to include('Welcome to Chitter!')
+      expect(response.body).to include('<h3>Welcome to Chitter!</h3>')
     end
   end
 

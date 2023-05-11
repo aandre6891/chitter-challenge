@@ -10,6 +10,8 @@ class Application < Sinatra::Base
   DatabaseConnection.connect('chitter_db_test')
   # This allows the app code to refresh
   # without having to restart the server.
+  enable :sessions
+  
   configure :development do
     register Sinatra::Reloader
   end
@@ -63,8 +65,8 @@ class Application < Sinatra::Base
     correct_email = repo.all.any? { |maker| maker.email == params[:email] }
     correct_password = repo.all.any? { |maker| maker.password == params[:password] }
     if correct_email && correct_password
-      maker_id = repo.find_by_email(params[:email])
-      redirect '/user/' + maker_id
+      maker = repo.find_by_email(params[:email])
+      redirect '/user/' + maker.id
     else
       return 'Invalid Email or Password <a href="/login">Try again</a>'
     end

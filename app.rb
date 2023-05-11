@@ -75,9 +75,29 @@ class Application < Sinatra::Base
 
     if repo.sign_in(email, password) == true
       session[:user_id] = user.id
-      redirect '/user/' + user.id
+      redirect '/account'
     else
       return "Invalid password. Go back to the <a href='/login'>Log In</a> and try again."
     end
+  end
+
+  get '/account' do
+    if session[:user_id] == nil
+      # No user id in the session
+      # so the user is not logged in.
+      return redirect('/login')
+    else
+      repo_makers = MakerRepository.new
+      repo_peeps = PeepRepository.new
+    
+      @maker = repo_makers.find(session[:user_id])
+      @peeps = repo_peeps.all
+      return erb(:account)
+    end
+  end
+
+  post '/logout' do
+    session[:user_id] = nil
+    redirect '/login'
   end
 end

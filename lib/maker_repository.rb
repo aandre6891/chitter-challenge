@@ -50,7 +50,12 @@ class MakerRepository
     result_set = DatabaseConnection.exec_params(sql, sql_params)
 
     record = result_set[0]
-    maker_id = record['id']
-    return maker_id
+    maker = Maker.new
+    maker.id = record['id']
+    maker.name = record['name']
+    maker.email = record['email']
+    maker.username = record['username']
+    maker.password = record['password']
+    return maker
   end
 end

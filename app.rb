@@ -5,6 +5,7 @@ require_relative 'lib/maker_repository'
 require_relative 'lib/maker'
 require_relative 'lib/peep'
 require_relative 'lib/database_connection'
+
 DatabaseConnection.connect
 
 class Application < Sinatra::Base

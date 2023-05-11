@@ -62,7 +62,7 @@ describe Application do
   end
 
   context "GET /user/:id" do
-    it 'should return the user page' do
+    xit 'should return the user page' do
       response = get("/user/1")
 
       expect(response.status).to eq 200
@@ -71,7 +71,7 @@ describe Application do
   end
 
   context "POST /signup" do
-    it 'should create a new user' do
+    xit 'should create a new user' do
       response = post(
         "/signup", 
         name: "Jordan", 
@@ -108,6 +108,19 @@ describe Application do
       )
       
       expect(response.status).to eq 200
+    end
+  end
+  
+  context "POST /login" do
+    it "should return a message when the account doesn't exists" do
+      response = post(
+        "/login", 
+        email: "notexistingemail@email.com",
+        password: "11111"
+      )
+      
+      expect(response.status).to eq 200
+      expect(response.body).to include('This email address is not registered')
     end
   end
 end

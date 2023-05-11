@@ -50,32 +50,32 @@ class Application < Sinatra::Base
     return 'A Maker with this email address and username already exists <a href="/signup">Try with another email</a> or <a href="/login">Log In</a>' if email_exists & username_exists
     return 'A Maker with this email address already exists <a href="/signup">Try with another email</a>' if email_exists 
     return 'A Maker with this username address already exists <a href="/signup">Try with another email</a>' if username_exists  
-    new_maker = Maker.new
-    new_maker.name = params[:name]
-    new_maker.email = params[:email]
-    new_maker.username = params[:username]
-    new_maker.password = params[:password]
-    repo.create(new_maker)
-    maker_id = repo.find_by_email(new_maker.email)
-    redirect '/user/' + maker_id
+    new_user = Maker.new
+    new_user.name = params[:name]
+    new_user.email = params[:email]
+    new_user.username = params[:username]
+    new_user.password = params[:password]
+    repo.create(new_user)
+    maker = repo.find_by_email(new_user.email)
+    redirect '/user/' + maker.id
   end
   
   post '/login' do
     email = params[:email]
     password = params[:password]
     repo = MakerRepository.new
+    
+    if !repo.all.any? { |maker| maker.email == email }
+      return "This email address is not registered. Go back to the <a href='/login'>Log In</a> and try again."
+    end
+
     user = repo.find_by_email(email)
 
-    # This is a simplified way of 
-    # checking the password. In a real 
-    # project, you should encrypt the password
-    # stored in the database.
     if user.password == password
-      # Set the user ID in session
       session[:user_id] = user.id
       redirect '/user/' + user.id
     else
-      return "Invalid email or password. Go back to <a href='/login'>Login</a> and try again."
+      return "Invalid password. Go back to the <a href='/login'>Log In</a> and try again."
     end
   end
 end

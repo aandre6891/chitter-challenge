@@ -33,12 +33,12 @@ class MakerRepository
   end
 
   def sign_in(email, submitted_password)
-    user = find_by_email(email)
+    maker = find_by_email(email)
 
-    return nil if user.nil?
+    return nil if maker.nil?
 
     # Compare the submitted password with the encrypted one saved in the database
-    stored_password = BCrypt::Password.new(user.password)
+    stored_password = BCrypt::Password.new(maker.password)
     if stored_password == submitted_password
       return true
     else

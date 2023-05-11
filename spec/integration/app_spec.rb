@@ -80,9 +80,7 @@ describe Application do
       
       expect(response.status).to eq 302
     end
-  end
 
-  context "POST /login" do
     it 'should return status 200 when the password is not valid' do
       response = post(
         "/login", 
@@ -92,9 +90,7 @@ describe Application do
       
       expect(response.status).to eq 200
     end
-  end
   
-  context "POST /login" do
     it "should return a message when the account doesn't exists" do
       response = post(
         "/login", 
@@ -104,6 +100,24 @@ describe Application do
       
       expect(response.status).to eq 200
       expect(response.body).to include('This email address is not registered')
+    end
+    
+    it "should return a message when the account doesn't exists" do
+      new_user = Maker.new
+      new_user.name = "Jordan"
+      new_user.email = "jordan@chitter.com"
+      new_user.username = "jordan555"
+      new_user.password = "123456"
+      repo = MakerRepository.new
+      repo.create(new_user)
+
+      response = post(
+        "/login", 
+        email: "jordan@chitter.com",
+        password: "123456"
+      )
+      
+      expect(response.status).to eq 302
     end
   end
   

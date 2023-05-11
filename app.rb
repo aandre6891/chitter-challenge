@@ -71,8 +71,9 @@ class Application < Sinatra::Base
     end
 
     user = repo.find_by_email(email)
+    
 
-    if user.password == password
+    if repo.sign_in(email, password) == true
       session[:user_id] = user.id
       redirect '/user/' + user.id
     else

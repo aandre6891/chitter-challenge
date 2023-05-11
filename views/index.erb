@@ -1,40 +1,35 @@
 <html>
   <head>
+    <link rel="stylesheet" href="/style.css" />
   </head>
 
   <body>
-  <link rel="stylesheet" href="/style.css" />
     <div>
       <img class="chitter_logo" src="/chitter_logo.webp" alt="Chitter Logo" />
     </div>   
 
     <div class="topnav">
-      <a class="active" href="/">Home</a>
+      <a href="/">Home</a>
       <a href="/login">Log In</a>
       <a href="/signup">Sign Up</a>
     </div>
     
     <div class="subtitle">
-      <a>Welcome to Chitter!</a>
+      <h1>Welcome to Chitter!</h1>
     </div>
 
     <div>
-      <p>These are the last 3 peeps:</p>
+      <h2>These are the last 3 peeps:</h2>
     </div>
 
-    <div>
-      <% @peeps.last(3).reverse_each do |peep| %>
-        <div class="w3-container">
-          <div class="last_peeps">
-            <%= peep.title %>
-            <%= peep.time %>
-            <%= peep.maker_id %>
-            <%= peep.content %>
-          </div>
-        </div>
-      <% end %>
+    <% @peeps.last(3).reverse_each do |peep| %>
+      <div>
+        <%= peep.title %>
+        <%= peep.time %>
+        <%= peep.maker_id %>
+        <%= peep.content %>
+      </div>
+    <% end %>
     </div>
-    
   </body>
-
 </html>

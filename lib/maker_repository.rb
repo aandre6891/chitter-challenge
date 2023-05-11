@@ -1,6 +1,7 @@
 # (in lib/maker_repository.rb)
 require_relative 'maker'
 require_relative 'database_connection'
+require 'bcrypt'
 
 class MakerRepository
   def initialize # initializes an empty array of makers
@@ -25,8 +26,10 @@ class MakerRepository
   end
 
   def create(maker) # Inserts a new Maker in the table makers, returns nothing
+    encrypted_password = BCrypt::Password.create(maker.password)
+    params = [maker.name, maker.email, maker.username, encrypted_password]
     sql = 'INSERT INTO makers (name, email, username, password) VALUES ($1, $2, $3, $4);'
-    result_set = DatabaseConnection.exec_params(sql, [maker.name, maker.email, maker.username, maker.password])
+    result_set = DatabaseConnection.exec_params(sql, params)
   end
 
   def find(id) # finds a Maker by id

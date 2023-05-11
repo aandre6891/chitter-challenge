@@ -5,10 +5,10 @@ require_relative 'lib/maker_repository'
 require_relative 'lib/maker'
 require_relative 'lib/peep'
 require_relative 'lib/database_connection'
+DatabaseConnection.connect
 
 class Application < Sinatra::Base
   enable :sessions
-  DatabaseConnection.connect('chitter_db_test')
   # This allows the app code to refresh
   # without having to restart the server.
   

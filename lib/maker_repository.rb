@@ -32,6 +32,20 @@ class MakerRepository
     result_set = DatabaseConnection.exec_params(sql, params)
   end
 
+  def sign_in(email, submitted_password)
+    user = find_by_email(email)
+
+    return nil if user.nil?
+
+    # Compare the submitted password with the encrypted one saved in the database
+    stored_password = BCrypt::Password.new(user.password)
+    if stored_password == submitted_password
+      return true
+    else
+      return false
+    end
+  end
+
   def find(id) # finds a Maker by id
     sql = 'SELECT id, name, email, username, password FROM makers WHERE id = $1;'
     sql_params = [id]

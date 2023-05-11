@@ -7,10 +7,10 @@ require_relative 'lib/peep'
 require_relative 'lib/database_connection'
 
 class Application < Sinatra::Base
+  enable :sessions
   DatabaseConnection.connect('chitter_db_test')
   # This allows the app code to refresh
   # without having to restart the server.
-  enable :sessions
   
   configure :development do
     register Sinatra::Reloader
@@ -61,14 +61,21 @@ class Application < Sinatra::Base
   end
   
   post '/login' do
+    email = params[:email]
+    password = params[:password]
     repo = MakerRepository.new
-    correct_email = repo.all.any? { |maker| maker.email == params[:email] }
-    correct_password = repo.all.any? { |maker| maker.password == params[:password] }
-    if correct_email && correct_password
-      maker = repo.find_by_email(params[:email])
-      redirect '/user/' + maker.id
+    user = repo.find_by_email(email)
+
+    # This is a simplified way of 
+    # checking the password. In a real 
+    # project, you should encrypt the password
+    # stored in the database.
+    if user.password == password
+      # Set the user ID in session
+      session[:user_id] = user.id
+      redirect '/user/' + user.id
     else
-      return 'Invalid Email or Password <a href="/login">Try again</a>'
+      return "Invalid email or password. Go back to <a href='/login'>Login</a> and try again."
     end
   end
 end

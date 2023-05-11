@@ -44,7 +44,7 @@ class MakerRepository
     return maker
   end
   
-  def find_by_email(email) # finds a Maker by email and returns the id
+  def find_by_email(email) # finds a Maker by email
     sql = 'SELECT id, name, email, username, password FROM makers WHERE email = $1;'
     sql_params = [email]
     result_set = DatabaseConnection.exec_params(sql, sql_params)

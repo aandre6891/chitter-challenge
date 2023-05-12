@@ -10,12 +10,16 @@
 
     <div class="topnav">
       <a href="/">Home</a>
-      <a href="/login">Log In</a>
-      <a href="/signup">Sign Up</a>
+      <% unless @maker.nil? %><a href="/account">Account</a><%end%>
+      <% if @maker.nil? %><%= '<a href="/login">Log In</a>' %><%end%>
+      <% if @maker.nil? %><%= '<a href="/signup">Sign Up</a>' %><%end%>
+      <a><% unless @maker.nil? %><form method="post" action="/logout">
+      <input type="submit" value="Log Out" id="logout"></form><%end%></a>
     </div>
+   
     
     <div class="subtitle">
-      <h1>Welcome to Chitter!</h1>
+      <h1>Welcome to Chitter<% unless @maker.nil? %><%= " #{@maker.name}" %><%end%>!</h1>
     </div>
 
     <div>
@@ -31,7 +35,5 @@
       </div>
     <% end %>
     </div>
-    <form method="post" action="/logout">
-        <input type="submit" value="Log Out">
   </body>
 </html>

@@ -18,8 +18,13 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    repo = PeepRepository.new
-    @peeps = repo.all
+    unless session[:user_id] == nil
+      repo_maker = MakerRepository.new
+      @maker = repo_maker.find(session[:user_id])
+    end
+
+    repo_peep = PeepRepository.new
+    @peeps = repo_peep.all
     return erb(:index)
   end
   

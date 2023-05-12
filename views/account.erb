@@ -10,6 +10,8 @@
 
     <div class="topnav">
       <a class="active" href="/">Home</a>
+      <% unless @maker.nil? %><a id="logout"><form method="post" action="/logout">
+        <input type="submit" value="Log Out"></form></a><%end%>
     </div>
 
     <div>
@@ -31,7 +33,5 @@
       <% end %>
     </div>
     </div>
-    <form method="post" action="/logout">
-        <input type="submit" value="Log Out">
   </body>
 </html>

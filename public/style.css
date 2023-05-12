@@ -30,4 +30,16 @@
   color: rgb(0, 29, 63);
 }
 
+#logout {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #0000EE;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 </style>

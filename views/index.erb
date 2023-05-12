@@ -27,7 +27,7 @@
     </div>
 
     <% @peeps.last(3).reverse_each do |peep| %>
-      <div>
+      <div class="peep_list">
         <%= peep.title %>
         <%= peep.time %>
         <%= peep.maker_id %>

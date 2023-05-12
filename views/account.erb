@@ -22,14 +22,12 @@
       <h2>This is the list of all the peeps</h2>
      <div>
       <% @peeps.reverse_each do |peep| %>
-        <div class="w3-container">
-          <div class="last_peeps">
-            <%= peep.title %>
-            <%= peep.time %>
-            <%= peep.maker_id %>
-            <%= peep.content %>
-          </div>
-        </div>
+        <div class="peep_list">
+        <%= peep.title %>
+        <%= peep.time %>
+        <%= peep.maker_id %>
+        <%= peep.content %>
+      </div>
       <% end %>
     </div>
     </div>

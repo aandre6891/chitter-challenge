@@ -30,16 +30,21 @@
   color: rgb(0, 29, 63);
 }
 
-#logout {
+.logout_btn {
   border: none;
   outline: none;
   background: none;
   cursor: pointer;
-  color: #0000EE;
+  color: #ffffff;
   padding: 0;
-  text-decoration: underline;
+  text-decoration: none;
   font-family: inherit;
   font-size: inherit;
+}
+
+.logout_btn:hover {
+  background-color: #ddd;
+  color: rgb(0, 29, 63);
 }
 
 </style>

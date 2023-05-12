@@ -9,12 +9,12 @@
     </div>   
 
     <div class="topnav">
+      <a><% unless @maker.nil? %><form class method="post" action="/logout">
+      <input type="submit" value="Log Out" class="logout_btn"></form><%end%></a>
       <a href="/">Home</a>
       <% unless @maker.nil? %><a href="/account">Account</a><%end%>
       <% if @maker.nil? %><%= '<a href="/login">Log In</a>' %><%end%>
       <% if @maker.nil? %><%= '<a href="/signup">Sign Up</a>' %><%end%>
-      <a><% unless @maker.nil? %><form method="post" action="/logout">
-      <input type="submit" value="Log Out" id="logout"></form><%end%></a>
     </div>
    
     

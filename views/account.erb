@@ -9,9 +9,9 @@
     </div>   
 
     <div class="topnav">
+      <a><% unless @maker.nil? %><form class method="post" action="/logout">
+      <input type="submit" value="Log Out" class="logout_btn"></form><%end%></a>
       <a class="active" href="/">Home</a>
-      <% unless @maker.nil? %><a id="logout"><form method="post" action="/logout">
-        <input type="submit" value="Log Out"></form></a><%end%>
     </div>
 
     <div>

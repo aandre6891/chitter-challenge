@@ -62,8 +62,9 @@ class Application < Sinatra::Base
     new_user.username = params[:username]
     new_user.password = params[:password]
     repo.create(new_user)
-    maker = repo.find_by_email(new_user.email)
-    redirect '/user/' + maker.id
+    user = repo.find_by_email(new_user.email)
+    session[:user_id] = user.id
+    redirect '/account'
   end
   
   post '/login' do
